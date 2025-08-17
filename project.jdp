@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+    stage('PULL') {
+        steps {
+            git branch: 'kube', url: 'https://github.com/yogeshgadwar10/EasyCRUD.git'
+        }
+    }
+    stage('BUILD') {
+        steps {
+            echo 'BUILD SUCCESS'
+        }
+    }
+    stage('TEST') {
+        steps {
+            echo 'TEST SUCCESS'            
+        }
+    }
+}
+    
