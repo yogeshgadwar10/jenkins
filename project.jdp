@@ -10,7 +10,7 @@ pipeline {
             echo 'BUILD SUCCESS'
         }
     }
-    stages('TEST') {
+    stage('TEST') {
         steps {
             echo 'TEST SUCCESS'            
         }
