@@ -8,7 +8,8 @@ pipeline {
         }
         stage('BUILD') {
             steps {
-               sh 'mvn clean package'
+               sh '''cd backend
+                     mvn clean package'''
             }
         }
          stage('TEST') {
