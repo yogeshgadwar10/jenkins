@@ -14,12 +14,20 @@ pipeline {
         }
          stage('TEST') {
             steps {
-                sh '''cd backend
-                     mvn sonar:sonar \\
-                     -Dsonar.projectKey=studentapp \\
-                     -Dsonar.projectName=\'studentapp\' \\
-                     -Dsonar.host.url=http://18.206.246.232:9000 \\
-                     -Dsonar.token=sqp_6e03bb4d754058ab4a395f3bd627d0160b1cbc3e'''
+                // sh '''cd backend
+                //      mvn sonar:sonar \\
+                //      -Dsonar.projectKey=studentapp \\
+                //      -Dsonar.projectName=\'studentapp\' \\
+                //      -Dsonar.host.url=http://18.206.246.232:9000 \\
+                //      -Dsonar.token=sqp_6e03bb4d754058ab4a395f3bd627d0160b1cbc3e'''
+
+                withSonarQubeEnv(installationName: 'sonarqube', credentialsId: 'sonar-cred') {
+                    sh '''cd backend
+                    mvn sonar:sonar \
+                    -Dsonar.projectKey=studentapp \
+
+    
+                }
             }
         }
     }
