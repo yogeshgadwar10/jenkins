@@ -31,7 +31,7 @@ pipeline {
         }
         stage('DEPLOY') {
             steps {
-                 sh 'aws cp s3 backend/target/student-registration-backend-0.0.1-SNAPSHOT.jar s3//alreadye/studentapp.jar'
+                 sh ' -- aws cp s3 backend/target/student-registration-backend-0.0.1-SNAPSHOT.jar s3//alreadye/studentapp.jar'
             }
         }
     }
