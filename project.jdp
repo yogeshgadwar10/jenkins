@@ -23,7 +23,7 @@ pipeline {
         }
         stage('QUALITY-GATE') {
             steps {
-                timeout(5) {
+                timeout(1) {
                      waitForQualityGate abortPipeline: true, credentialsId: 'sonar-cred'    
                 }
                
@@ -31,7 +31,7 @@ pipeline {
         }
         stage('DEPLOY') {
             steps {
-               echo 'Deploy SUCCESSFUL'
+                 sh 'aws cp s3 backend/target/student-registration-backend-0.0.1-SNAPSHOT.jar s3//alreadye/studentapp.jar'
             }
         }
     }
