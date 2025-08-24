@@ -2,17 +2,27 @@ pipeline{
     stages {
         stage('PULL') {
             steps {
+                git branch: 'dev', url: 'https://github.com/yogeshgadwar10/jenkins.git'
 
             }
         }
          stage('PLAN') {
             steps {
+                sh '''terraform init
+                       terraform plan'''
+            }
+        }
+        stage('APPROVE') {
+            steps {
+                timeout(1) {
+                input message 'Approve is required : shall we proceed ?' ok: "Approve"
+            }
 
             }
         }
          stage('APPLY') {
             steps {
-
+                sh 'terraform apply --auto-approve'
             }
         }
         
