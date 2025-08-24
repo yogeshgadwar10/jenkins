@@ -96,7 +96,7 @@ resource "aws_eks_node_group" "my_cluster" {
   }
  
  depends_on = [
-  aws_iam_cluster.my_cluster,
+  aws_eks_cluster.my_cluster,
   aws_iam_role_policy_attachment.eks_cni_policy_attachment,
   aws_iam_role_policy_attachment.eks_worker_node_policy,
   aws_iam_role_policy_attachment.ec2_container_registery
