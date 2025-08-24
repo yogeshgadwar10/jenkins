@@ -38,7 +38,7 @@ resource "aws_eks_cluster" "my_cluster" {
 
  vpc_config {
     subnet_ids = [
-      aws_subnets.my_subnets.ids   
+      data.aws_subnets.my_subnets.ids   
     ]
   }
   depends_on = [ 
