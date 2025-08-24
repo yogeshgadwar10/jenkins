@@ -26,13 +26,13 @@ resource "aws_iam_role_policy_attachment" "cluster_prlicy_attachment" {
 data "aws_vpc" "my_vpc" {
   default = true
 }
-resource "aws_subnets" "my_subnets" {
+data "aws_subnets" "my_subnets" {
   filter {
     name = "vpc-id"
     values = [data.aws_vpc.my_vpc.id]
   }  
 }
-resource "aws_iam_cluster" "my_cluster" {
+resource "aws_eks_cluster" "my_cluster" {
  name = "my-eks-cluster"
  role_arn = aws_iam_role.eks_cluster_role.arn 
 
