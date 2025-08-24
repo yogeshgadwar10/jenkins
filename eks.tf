@@ -19,7 +19,7 @@ resource "aws_iam_role" "eks_cluster_role" {
   })
   
 }
-resource "aws_iam_role_policy_attchment" "cluster_prlicy_attachment" {
+resource "aws_iam_role_policy_attachment" "cluster_prlicy_attachment" {
   role = aws_iam_role.eks_cluster_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
 }
@@ -42,7 +42,7 @@ resource "aws_iam_cluster" "my_cluster" {
     ]
   }
   depends_on = [ 
-    aws_iam_role_policy_attchment.cluster_prlicy_attachment
+    aws_iam_role_policy_attachment.cluster_prlicy_attachment
    ]
 }
 
@@ -66,15 +66,15 @@ resource "aws_iam_role" "node_role" {
     })
 }
 
-resource "aws_iam_role_policy_attchment" "eks_cni_policy_attachment" {
+resource "aws_iam_role_policy_attachment" "eks_cni_policy_attachment" {
   role = aws_iam_role.node_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
 }
-resource "aws_iam_role_policy_attchment" "eks_worker_node_policy" {
+resource "aws_iam_role_policy_attachment" "eks_worker_node_policy" {
   role = aws_iam_role.node_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
 }
-resource "aws_iam_role_policy_attchment" "ec2_container_registery" {
+resource "aws_iam_role_policy_attachment" "ec2_container_registery" {
   role = aws_iam_role.node_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
@@ -97,9 +97,9 @@ resource "aws_eks_node_group" "my_cluster" {
  
  depends_on = [
   aws_iam_cluster.my_cluster,
-  aws_iam_role_policy_attchment.eks_cni_policy_attachment,
-  aws_iam_role_policy_attchment.eks_worker_node_policy,
-  aws_iam_role_policy_attchment.ec2_container_registery
+  aws_iam_role_policy_attachment.eks_cni_policy_attachment,
+  aws_iam_role_policy_attachment.eks_worker_node_policy,
+  aws_iam_role_policy_attachment.ec2_container_registery
 
   ]
 }
