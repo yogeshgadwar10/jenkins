@@ -1,0 +1,20 @@
+pipeline{
+    stages {
+        stage('PULL') {
+            steps {
+
+            }
+        }
+         stage('PLAN') {
+            steps {
+
+            }
+        }
+         stage('APPLY') {
+            steps {
+
+            }
+        }
+        
+    }
+}
