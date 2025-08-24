@@ -1,4 +1,5 @@
-pipeline{
+pipeline {
+    agent any
     stages {
         stage('PULL') {
             steps {
@@ -15,7 +16,7 @@ pipeline{
         stage('APPROVE') {
             steps {
                 timeout(1) {
-                input message 'Approve is required : shall we proceed ?' ok: "Approve"
+                input message: 'Approve is required : shall we proceed ?', ok: "Approve"
             }
 
             }
