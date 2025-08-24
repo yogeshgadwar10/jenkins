@@ -9,7 +9,7 @@ pipeline {
         }
          stage('PLAN') {
             steps {
-                sh '''cd pipelines
+                sh '''
                        terraform init
                        terraform plan'''
             }
