@@ -1,6 +1,13 @@
 pipeline {
     agent any
-    stages {
+      stages {
+     
+        stage('Cleanup') {
+            steps {
+                sh 'rm -f unwanted-file.txt'
+                // or for Windows: bat 'del unwanted-file.txt'
+            }
+        }
         stage('PULL') {
             steps {
                 git branch: 'dev', url: 'https://github.com/yogeshgadwar10/jenkins.git'
