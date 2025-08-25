@@ -19,31 +19,43 @@ resource "aws_iam_role" "eks_cluster_role" {
   })
   
 }
-resource "aws_iam_role_policy_attachment" "cluster_prlicy_attachment" {
+resource "aws_iam_role_policy_attachment" "cluster_policy_attachment" {
   role = aws_iam_role.eks_cluster_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
 }
 data "aws_vpc" "my_vpc" {
-  default = true
+    # default = true
 }
+
 data "aws_subnets" "my_subnets" {
-  filter {
-    name = "vpc-id"
-    values = [data.aws_vpc.my_vpc.id]
-  }  
+    filter {
+        name = "vpc-id"
+       values = ["vpc-0a2a032a6b2da829e"]
+    }
 }
+
+# data "aws_vpc" "my_vpc" {
+#   default = true
+# }
+# data "aws_subnets" "my_subnets" {
+#   filter {
+#     name = "vpc-id"
+#     values = [data.aws_vpc.my_vpc.id]
+#   }  
+# }
 resource "aws_eks_cluster" "my_cluster" {
  name = "my-eks-cluster"
  role_arn = aws_iam_role.eks_cluster_role.arn 
 
  vpc_config {
-    subnet_ids = [
-      data.aws_subnets.my_subnets.ids   
-    ]
+    # subnet_ids = data.aws_subnets.my_subnets.ids 
+    subnet_ids = data.aws_subnets.my_subnets.ids
+ 
   }
   depends_on = [ 
-    aws_iam_role_policy_attachment.cluster_prlicy_attachment
+    aws_iam_role_policy_attachment.cluster_policy_attachment
    ]
+  
 }
 
 resource "aws_iam_role" "node_role" {
@@ -84,6 +96,7 @@ resource "aws_eks_node_group" "my_cluster" {
   node_group_name = "my-node-group"
   node_role_arn   = aws_iam_role.node_role.arn
   subnet_ids      = data.aws_subnets.my_subnets.id
+  instance_types = ["t3.medium"]
 
   scaling_config {
     desired_size = 2
