@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+      stages {
+     
+        stage('Cleanup') {
+            steps {
+                sh 'rm -f unwanted-file.txt'
+                // or for Windows: bat 'del unwanted-file.txt'
+            }
+        }
+    }
+}
