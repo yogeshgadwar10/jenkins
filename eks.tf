@@ -108,7 +108,7 @@ resource "aws_eks_node_group" "my_cluster" {
   cluster_name    = aws_eks_cluster.my_cluster.name
   node_group_name = "my-node-group"
   node_role_arn   = aws_iam_role.node_role.arn
-  subnet_ids      = data.aws_subnets.my_subnets.id
+  subnet_ids      = data.aws_subnets.my_subnets.ids
   instance_types = ["t3.medium"]
 
   scaling_config {
