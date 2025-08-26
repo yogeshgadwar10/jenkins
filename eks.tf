@@ -23,26 +23,39 @@ resource "aws_iam_role_policy_attachment" "cluster_policy_attachment" {
   role = aws_iam_role.eks_cluster_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
 }
+
+resource "aws_iam_role" "my-role" {
+  name = "eks-my-role"
+  assume_role_policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeVpcs",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeInstances"
+            ],
+            "Resource": "*"
+        }
+    ]
+}) // arn:aws:iam::aws:policy/AmazonEC2FullAccess
+}
+resource "aws_iam_role_policy_attachment" "ec2_full_excces" {
+  role = aws_iam_role.eks_cluster_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+}
+
 data "aws_vpc" "my_vpc" {
-    # default = true
+  default = true
 }
-
 data "aws_subnets" "my_subnets" {
-    filter {
-        name = "vpc-id"
-       values = ["vpc-0a2a032a6b2da829e"]
-    }
+  filter {
+    name = "vpc-id"
+    values = [data.aws_vpc.my_vpc.id]
+  }  
 }
-
-# data "aws_vpc" "my_vpc" {
-#   default = true
-# }
-# data "aws_subnets" "my_subnets" {
-#   filter {
-#     name = "vpc-id"
-#     values = [data.aws_vpc.my_vpc.id]
-#   }  
-# }
 resource "aws_eks_cluster" "my_cluster" {
  name = "my-eks-cluster"
  role_arn = aws_iam_role.eks_cluster_role.arn 
