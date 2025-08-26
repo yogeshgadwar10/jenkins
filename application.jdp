@@ -19,5 +19,16 @@ pipeline {
                 docker build . -t yogeshgadwar/backend:latest'''
             }
         }
+        stage('CLEAN') {
+            steps {
+                sh '''docker rmi -f yogeshgadwar/frontend:latest
+                      docker rmi -f yogeshgadwar/backend:latest'''
+            }
+        }
+        stage('DEPLOY') {
+            steps {
+                sh 'kubectl apply -f SHORT_KUBE_YAMLS'
+            }
+        }
     }
 }
