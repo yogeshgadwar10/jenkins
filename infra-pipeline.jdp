@@ -17,8 +17,13 @@ pipeline {
          stage('PLAN') {
             steps {
                 sh '''
-                       terraform init
-                       terraform plan'''
+                       terraform init'''
+            }
+        }
+        stage('PLAN') {
+            steps {
+                sh '''
+                    terraform plan'''
             }
         }
         stage('APPROVE') {
