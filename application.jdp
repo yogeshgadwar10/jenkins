@@ -2,10 +2,21 @@ pipeline {
     agent any
       stages {
      
-        stage('Cleanup') {
+        stage('PULL') {
             steps {
-                sh 'rm -f unwanted-file.txt'
-                // or for Windows: bat 'del unwanted-file.txt'
+                git branch: 'dev', url: 'https://github.com/yogeshgadwar10/jenkins.git'
+            }
+        }
+        stage('FRONTEND-DOCKER-BUILD') {
+            steps {
+                sh '''cd frontend
+                docker build . -t yogeshgadwar/frontend:latest'''
+            }
+        }
+        stage('BACKEND-DOCKER-BUILD') {
+            steps {
+                sh '''cd backend
+                docker build . -t yogeshgadwar/backend:latest'''
             }
         }
     }
