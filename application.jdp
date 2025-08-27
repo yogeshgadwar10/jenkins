@@ -16,7 +16,8 @@ pipeline {
         }
         stage('BACKEND-DOCKER-BUILD') {
             steps {
-                sh 'cd backend && docker build . -t yogeshgadwar/backend:latest'
+                sh 'cd backend 
+                 docker build . -t yogeshgadwar/backend:latest'
             }
         }
         stage('CLEAN') {
