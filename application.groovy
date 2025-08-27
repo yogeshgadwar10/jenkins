@@ -9,8 +9,10 @@ pipeline {
         }
         stage('FRONTEND-DOCKER-BUILD') {
             steps {
-                sh 'cd frontend 
-                 docker build . -t yogeshgadwar/frontend:latest'
+                
+                   sh '''cd frontend
+                   docker build . -t yogeshgadwar/frontend:latest'''
+                   
                 // sh 'cd /var/lib/jenkins/workspace/studnet-app/frontend && docker build . -t yogeshgadwar/frontend:latest'
             }
         }
