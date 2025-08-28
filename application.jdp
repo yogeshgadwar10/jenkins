@@ -4,7 +4,7 @@ pipeline {
      
         stage('PULL') {
             steps {
-                git branch: 'kube', url: 'https://github.com/yogeshgadwar10/EasyCRUD.git'                
+                git branch: 'kube', url: 'https://github.com/yogeshgadwar10/EasyCRUD.git'                                
             }
         }
         stage('FRONTEND-DOCKER-BUILD') {
