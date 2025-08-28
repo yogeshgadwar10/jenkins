@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        booleanParam(name: 'RunTest'; defaultValue:true, description: 'Run or skip test')
+        booleanParam(name: 'RunTest'; defaultValue: true, description: 'Run or skip test')
     }
     stages {
      
