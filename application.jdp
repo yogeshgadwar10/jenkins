@@ -1,6 +1,6 @@
 pipeline {
     agent any
-      stages {
+    stages {
      
         stage('PULL') {
             steps {
@@ -30,7 +30,7 @@ pipeline {
                 sh 'docker push yogeshgadwar/frontend:latest'
             }
         }
-        stage('PUSH-DOCKER-HUB-FRONTEND') {
+        stage('PUSH-DOCKER-HUB-BACKEND') {
             steps {
                 sh 'docker push yogeshgadwar/backend:latest'
             }
