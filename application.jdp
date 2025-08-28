@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    parameter {
+        boolean Param(name: 'RunTest'; dfaultValue:true, description: 'Run or skip test')
+    }
     stages {
      
         stage('PULL') {
