@@ -26,6 +26,17 @@ pipeline {
                  docker build . -t yogeshgadwar/backend:latest'''
             }
         }
+        stage('PUSH-DOCKER-HUB-FRONTEND') {
+            steps {
+                sh 'docker push yogeshgadwar/frontend:latest'
+            }
+        }
+        stage('PUSH-DOCKER-HUB-FRONTEND') {
+            steps {
+                sh 'docker push yogeshgadwar/backend:latest'
+            }
+        }
+
         stage('CLEAN') {
             steps {
                 sh '''docker rmi -f yogeshgadwar/frontend:latest
