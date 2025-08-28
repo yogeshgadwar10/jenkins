@@ -22,17 +22,18 @@ pipeline {
         stage('BACKEND-DOCKER-BUILD') {
             steps {
                 sh '''cd backend 
-                 docker build . -t yogeshgadwar/backend:latest'''
+                 docker build . -t yogeshgadwar/easy-backend:latest'''
+                 sh ''
             }
         }
         stage('PUSH-DOCKER-HUB-FRONTEND') {
             steps {
-                sh 'docker push yogeshgadwar/frontend:latest'
+                sh 'docker push yogeshgadwar/easy-frontend:latest'
             }
         }
         stage('PUSH-DOCKER-HUB-BACKEND') {
             steps {
-                sh 'docker push yogeshgadwar/backend:latest'
+                sh 'docker push yogeshgadwar/easy-backend:latest'
             }
         }
 
